@@ -10,7 +10,7 @@
 
 (def ZERO 0.0)
 
-(def NEAR_TO_ZERO 0.1)
+(def NEAR_ZERO 0.1)
 
 (def CONSIDER_SAME 0.1)
 
@@ -152,7 +152,7 @@
       (= ZERO (abs new)))))
 
 (defn round-to-zero [[k v]]
-  (if (< (abs v) NEAR_TO_ZERO)
+  (if (< (abs v) NEAR_ZERO)
     [k ZERO]
     [k v]))
 
