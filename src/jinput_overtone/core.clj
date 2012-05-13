@@ -144,10 +144,12 @@
   [controller (conj old-state diffs)])
 
 (defn different-values? [old new]
-  (or
-    (> (abs (- old new)) CONSIDER_SAME)
-    (and (not= old new) (= LIMIT (abs new)))
-    (and (not= old new) (= ZERO (abs new)))))
+  (and
+    (not= old new)
+    (or
+      (> (abs (- old new)) CONSIDER_SAME)
+      (= LIMIT (abs new))
+      (= ZERO (abs new)))))
 
 (defn round-to-zero [[k v]]
   (if (< (abs v) NEAR_TO_ZERO)
