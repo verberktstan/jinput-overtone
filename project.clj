@@ -1,4 +1,4 @@
-(defproject jinput-overtone/jinput-overtone "1.0.0-SNAPSHOT"
+(defproject jinput-overtone/jinput-overtone "0.0.1-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.clojure/math.numeric-tower "0.0.1"]
                  [overtone/at-at "1.0.0-SNAPSHOT"]
