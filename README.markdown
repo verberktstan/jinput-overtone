@@ -33,6 +33,10 @@ Attaching functions to events
               HAT_E (percuss mout :crash-cymbal-2 )
               HAT_S (percuss mout :pedal-hi-hat )
               nil)})
+              
+## Development
+This project is being developed and tested with lein-2 preview-3 and Overtone-0.0.7-SNAPSHOT
+on Windows.
 
 ## License
 
