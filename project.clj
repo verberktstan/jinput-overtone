@@ -7,4 +7,4 @@
                  [jinput "0.0.2"]]
   :min-lein-version "2.0.0"
   :plugins [[lein-pprint "1.1.1"]]
-  :description "Adding JInput devices to Overtone, the Clojure music project")
+  :description "Bringing JInput devices to Overtone, the Clojure music project")
