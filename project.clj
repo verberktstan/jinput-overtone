@@ -8,4 +8,4 @@
   :main jinput-overtone.core
   :min-lein-version "2.0.0"
   :plugins [[lein-pprint "1.1.1"]]
-  :description "FIXME: write description")
+  :description "Adding JInput devices to Overtone, the Clojure music project")
