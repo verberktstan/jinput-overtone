@@ -6,10 +6,19 @@
 
 (def DELAY 30)
 
+(def NO_DIFFS {})
+
+(def ZERO 0.0)
+
+(def NEAR_TO_ZERO 0.1)
+
+(def CONSIDER_SAME 0.1)
+
+(def LIMIT 1.0)
+
 (defonce handler-pool (handlers/mk-handler-pool "Jinput Event Handlers"))
 
-(defn button [n]
-  (str "Button " n))
+(defn button [n] (str "Button " n))
 
 (def BUTTON0 (button 0))
 (def BUTTON1 (button 1))
@@ -53,8 +62,6 @@
 (def HAT_SW (:south-west HAT_DIRECTIONS))
 (def HAT_W (:west HAT_DIRECTIONS))
 
-(def NO_DIFFS {})
-
 (defn controller-type [controller]
   (-> controller .getType .toString))
 
@@ -97,10 +104,6 @@
   ([] (.getControllers (ControllerEnvironment/getDefaultEnvironment)))
   ([fn] (filter fn (find-controllers))))
 
-(defn print-controllers []
-  (doseq [item (find-controllers)]
-    (println (find-name item))))
-
 (defn find-gamepads []
   (find-controllers gamepad?))
 
@@ -112,11 +115,11 @@
 
 (defn poll-state [controller]
   (if (.poll controller)
-    (into {} (map #(vector % (.getPollData %)) (.getComponents controller)))
+    (into {} (map #(-> [% (.getPollData %)]) (.getComponents controller)))
     NO_DIFFS))
 
 (defn poll-states [controllers]
-  (into {} (map #(vector % (poll-state %)) controllers)))
+  (into {} (map #(-> [% (poll-state %)]) controllers)))
 
 (defn event-send [path value]
   (handlers/event handler-pool path :val value))
@@ -131,7 +134,7 @@
 (defn send-diffs
   "Send diffs if there are any"
   [sender controller diffs]
-  (when (not= NO_DIFFS diffs)
+  (when (not= diffs NO_DIFFS)
     (println (.getName controller) diffs)
     (doseq [[k v] diffs]
       (sender (message-path controller k) v))))
@@ -142,15 +145,13 @@
 
 (defn different-values? [old new]
   (or
-    (> (abs (- old new)) 0.1)
-    (and
-      (= 1.0 (abs new))
-      (not= old new))
-    ))
+    (> (abs (- old new)) CONSIDER_SAME)
+    (and (not= old new) (= LIMIT (abs new)))
+    (and (not= old new) (= ZERO (abs new)))))
 
 (defn round-to-zero [[k v]]
-  (if (< (abs v) 0.1)
-    [k 0.0]
+  (if (< (abs v) NEAR_TO_ZERO)
+    [k ZERO]
     [k v]))
 
 (defn diff-state
@@ -165,12 +166,11 @@
   (send-and-store controller old-state sender (diff-state old-state (poll-state controller))))
 
 (defn loop-states [controllers sender old-states]
-  (Thread/sleep DELAY)
-  (recur
-    controllers
-    sender
-    (into {}
-      (map #(new-state % (get old-states %) sender) controllers))))
+  (loop [states old-states]
+    (Thread/sleep DELAY)
+    (recur
+      (into {}
+        (map #(new-state % (get states %) sender) controllers)))))
 
 (defn loop-controllers [controllers sender]
   (loop-states controllers sender (poll-states controllers)))
@@ -178,12 +178,11 @@
 (defn event-loop-game []
   (loop-controllers (find-controllers game-controller?) #'event-send))
 
-(defn stopf [f]
-  (when (future? f)
-    (future-cancel f)))
-
-(defn event-thread []
+(defn start-input []
   (let [t (Thread. event-loop-game)]
     (.setDaemon t true)
-    (.run t)
+    (.start t)
     t))
+
+(defn stop-input [p]
+  (.stop p))
