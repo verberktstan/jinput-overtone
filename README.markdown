@@ -55,7 +55,7 @@ Attaching functions to events
               nil)})
               
 ## Development
-This project is being developed and tested with lein-2 preview-3 and Overtone-0.0.7-SNAPSHOT
+This project is being developed and tested with lein-2 preview-6 and Overtone-0.0.7
 on Windows.
 
 ## License
