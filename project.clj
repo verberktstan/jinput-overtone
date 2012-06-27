@@ -4,7 +4,7 @@
                  [overtone/at-at "1.0.0"]
                  [overtone/libs.handlers "0.2.0"]
                  [overtone "0.7.0"]
-                 [jinput "0.0.2"]]
+                 [jinput "0.0.3"]]
   :min-lein-version "2.0.0"
   :plugins [[lein-pprint "1.1.1"]]
   :description "Bringing JInput devices to Overtone, the Clojure music project")

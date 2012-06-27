@@ -1,5 +1,5 @@
 (ns jinput-overtone.core
-  (:use [overtone.libs.handlers :as handlers])
+  (:require [overtone.libs.handlers :as handlers])
   (:use [clojure.math.numeric-tower :only [abs]])
   (import
     (net.java.games.input ControllerEnvironment Component Controller)))
