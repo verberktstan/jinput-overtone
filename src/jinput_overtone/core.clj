@@ -1,6 +1,5 @@
 (ns jinput-overtone.core
-  (:require [overtone.libs.handlers :as hndlrs]
-            [overtone.config.log :as log]
+  (:require [overtone.config.log :as log]
             [overtone.libs.event :as evnt])
   (:use [clojure.math.numeric-tower :only [abs]])
   (import
@@ -17,8 +16,6 @@
 (def CONSIDER_SAME 0.1)
 
 (def LIMIT 1.0)
-
-(defonce handler-pool (hndlrs/mk-handler-pool "Jinput Event Handlers"))
 
 (defn button [n] (str "Button " n))
 
@@ -124,14 +121,14 @@
   (into {} (map #(-> [% (poll-state %)]) controllers)))
 
 (defn event-send [path value]
-  (hndlrs/event handler-pool path {:val value}))
+  (evnt/event path {:val value}))
 
 (defn controller-event-handlers
   "parameters are a controller and a map of components to functions"
   [controller handlers]
   (when controller
     (doseq [[k v] handlers]
-      (hndlrs/add-handler! handler-pool (message-path controller k) (keyword k) v))))
+      (evnt/on-event (message-path controller k) v (keyword k)))))
 
 (defn send-diffs
   "Send diffs if there are any"
