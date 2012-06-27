@@ -124,7 +124,7 @@
   (into {} (map #(-> [% (poll-state %)]) controllers)))
 
 (defn event-send [path value]
-  (hndlrs/event handler-pool path :val value))
+  (hndlrs/event handler-pool path {:val value}))
 
 (defn controller-event-handlers
   "parameters are a controller and a map of components to functions"
