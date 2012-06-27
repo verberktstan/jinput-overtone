@@ -1,5 +1,7 @@
 (ns jinput-overtone.core
-  (:require [overtone.libs.handlers :as hndlrs])
+  (:require [overtone.libs.handlers :as hndlrs]
+            [overtone.config.log :as log]
+            [overtone.libs.event :as evnt])
   (:use [clojure.math.numeric-tower :only [abs]])
   (import
     (net.java.games.input ControllerEnvironment Component Controller)))
@@ -44,14 +46,14 @@
 (def Z-AXIS "Z Axis")
 
 (def HAT_DIRECTIONS {
-                      :north-west 0.125
-                      :north 0.25
-                      :north-east 0.375
-                      :east 0.5
-                      :south-east 0.625
-                      :south 0.75
-                      :south-west 0.875
-                      :west 1.0})
+  :north-west 0.125
+  :north 0.25
+  :north-east 0.375
+  :east 0.5
+  :south-east 0.625
+  :south 0.75
+  :south-west 0.875
+  :west 1.0})
 
 (def HAT_NW (:north-west HAT_DIRECTIONS))
 (def HAT_N (:north HAT_DIRECTIONS))
@@ -111,7 +113,7 @@
   (first (find-controllers #(re-find (re-pattern (str "(?i)" pattern)) (find-name %)))))
 
 (defn message-path [controller component]
-  [controller (find-name component)])
+  [:jinput controller (find-name component)])
 
 (defn poll-state [controller]
   (if (.poll controller)
