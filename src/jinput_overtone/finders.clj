@@ -1,4 +1,5 @@
 (ns jinput-overtone.finders
+  (:use [jinput-overtone.core])
   (import (net.java.games.input ControllerEnvironment)))
 
 (defn controller-type [controller]
