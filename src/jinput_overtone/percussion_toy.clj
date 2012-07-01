@@ -5,8 +5,8 @@
         [midiutils-overtone.core]
         [jinput-overtone.core]
         [jinput-overtone.finders]
-        [jinput-overtone.handlers])
-  )
+        [jinput-overtone.handlers]
+        [jinput-overtone.loop]))
 
 (def mout (midi-out "GS"))
 
@@ -14,17 +14,6 @@
   (note-on-off out channel note 100 400))
 
 (def metro (metronome 240))
-
-(def notes
-  [[:C5 :_ :D5 :_ :E5 :_ :C5 :_
-    :C5 :_ :D5 :_ :E5 :_ :C5 :_
-    :E5 :_ :F5 :_ :G5 :_ :_ :_
-    :E5 :_ :F5 :_ :G5 :_ :_ :_
-    :G5 :A5 :G5 :F5 :E5 :_ :C5 :_
-    :G5 :A5 :G5 :F5 :E5 :_ :C5 :_
-    :C5 :_ :G4 :_ :C5 :_ :_ :_
-    :C5 :_ :G4 :_ :C5 :_ :_ :_
-    ]])
 
 (def frere-intervals
   [[:i :_ :ii :_ :iii :_ :i :_
@@ -81,7 +70,7 @@
    BUTTON5 #(when (button-pressed? (:val %)) (percuss mout :open-triangle ))
    BUTTON6 #(when (button-pressed? (:val %)) (percuss mout :maracas ))
    BUTTON7 #(when (button-pressed? (:val %)) (percuss mout :tambourine ))
-   X-AXIS #(println "X = "(:val %))
+   X-AXIS #(println "X = " (:val %))
    HAT #(condp hat-direction? (:val %)
           HAT_N (percuss mout :open-hi-hat )
           HAT_W (percuss mout :crash-cymbal-1 )
