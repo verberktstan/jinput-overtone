@@ -7,4 +7,7 @@
                  [jinput "0.0.3"]]
   :min-lein-version "2.0.0"
   :plugins [[lein-pprint "1.1.1"]]
-  :description "Bringing JInput devices to Overtone, the Clojure music project")
+  :description "Bringing JInput devices to Overtone, the Clojure music project"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :url "https://github.com/gavilancomun/jinput-overtone")
