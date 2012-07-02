@@ -1,6 +1,5 @@
 (ns jinput-overtone.finders
-  (:use [jinput-overtone.core])
-  (import (net.java.games.input ControllerEnvironment)))
+  (import (net.java.games.input ControllerEnvironment Component Controller)))
 
 (defn controller-type [controller]
   (-> controller .getType .toString))
@@ -28,6 +27,12 @@
 
 (defn find-gamepads []
   (find-controllers gamepad?))
+
+(defn- find-name [item]
+  (cond
+    (instance? Component) (.getName item)
+    (instance? Controller) (.getName item)
+    :else (.toString item)))
 
 (defn find-controller [pattern]
   (first (find-controllers #(re-find (re-pattern (str "(?i)" pattern)) (find-name %)))))

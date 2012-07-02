@@ -5,6 +5,7 @@
         [midiutils-overtone.core]
         [jinput-overtone.core]
         [jinput-overtone.finders]
+        [jinput-overtone.events]
         [jinput-overtone.handlers]
         [jinput-overtone.loop]))
 
