@@ -2,6 +2,7 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/math.numeric-tower "0.0.2"]
                  [overtone/midi-clj "0.5.0"]
+                 [overtone/at-at "1.2.0"]
                  [overtone "0.8.0"]
                  [midiutils-overtone "0.0.1-SNAPSHOT"]
                  [jinput "0.0.3"]]

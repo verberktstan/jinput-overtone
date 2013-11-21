@@ -14,7 +14,7 @@ strings, you can use:
 
     (map find-name (find-controllers))
     
-The names may be vague, for example "USB Game Controllers" is the name
+Sometimes the names returned by the devices are vague, for example "USB Game Controllers" is the name
 of a single joystick. They may be more useful, such as "Controller (XBOX 360 For Windows)".
 
 The utility function (find-controller x) does a regular expression match using its string
