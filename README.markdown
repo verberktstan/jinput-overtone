@@ -58,11 +58,11 @@ Attaching functions to events
               nil)})
               
 ## Development
-This project is being developed and tested with lein-2 preview-6 and Overtone-0.0.7
+This project is being developed and tested with lein-2 and Overtone-0.8.0
 on Windows.
 
 ## License
 
-Copyright (C) 2012 James Petry.
+Copyright (C) 2012-2013 James Petry.
 
 Distributed under the Eclipse Public License, the same as Clojure.

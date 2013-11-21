@@ -29,7 +29,7 @@
 
 (def frere-notes
   "Map all nested intervals to midi note numbers"
-  (map #(degrees->pitches % :major :C4 ) frere-intervals))
+  (map #(degrees->pitches % :major :C4) frere-intervals))
 
 ;; Plays the tune endlessly
 (defn play-notes
@@ -38,23 +38,23 @@
   time indicated by the metronome"
   ([initial-beat initial-notes] (play-notes mout 0 initial-beat initial-notes))
   ([out channel initial-beat initial-notes]
-    (let [last-note 64]
-      (loop [note-count 1
-             beat initial-beat
-             notes initial-notes]
-        (let [notes-to-play (remove nil? (map first notes))]
-          (midi-at (metro beat)
-            (fn []
-              (dorun
-                (map #(play-note out channel %) notes-to-play)))))
-        (when (< note-count last-note)
-          (recur (inc note-count) (inc beat) (map rest notes)))))))
+   (let [last-note 64]
+     (loop [note-count 1
+            beat initial-beat
+            notes initial-notes]
+       (let [notes-to-play (remove nil? (map first notes))]
+         (midi-at (metro beat)
+                  (fn []
+                    (dorun
+                      (map #(play-note out channel %) notes-to-play)))))
+       (when (< note-count last-note)
+         (recur (inc note-count) (inc beat) (map rest notes)))))))
 
 (defn tune-frere
   ([] (tune-frere mout 0 :acoustic-grand-piano ))
   ([out channel instrument]
-    (program-change out channel (instrument GM))
-    (play-notes out channel (metro) (map cycle frere-notes))))
+   (program-change out channel (instrument GM))
+   (play-notes out channel (metro) (map cycle frere-notes))))
 
 (defonce xbox (find-controller "XBOX"))
 
