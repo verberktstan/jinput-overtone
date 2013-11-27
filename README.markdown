@@ -3,7 +3,7 @@
 Bringing JInput devices to Overtone, the Clojure music project
 
 JInput is a Java library for working with devices such as gamepads
-and joysticks.
+and joysticks. <https://java.net/projects/jinput>
 
 __N.B.__ This code is currently in transition to use overtone.libs.event
 so don't expect it to be useful as-is!
@@ -58,8 +58,7 @@ Attaching functions to events
               nil)})
               
 ## Development
-This project is being developed and tested with lein-2 and Overtone-0.8.0
-on Windows.
+This project is being developed and tested with lein 2 and Overtone on Windows.
 
 ## License
 
