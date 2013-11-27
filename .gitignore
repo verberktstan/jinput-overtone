@@ -11,3 +11,5 @@
 *~
 *.swp
 /target
+/.idea
+*.iml
