@@ -5,17 +5,16 @@ Bringing JInput devices to Overtone, the Clojure music project
 JInput is a Java library for working with devices such as gamepads
 and joysticks. <https://java.net/projects/jinput>
 
-__N.B.__ This code is currently in transition to use overtone.libs.event
-so don't expect it to be useful as-is!
+__N.B.__ This code is currently in transition to use overtone.libs.event.
 
 ## Identifying Your Controllers
-You can work with controllers using name strings. To find these
-strings, you can use:
+You can work with controllers using name strings. To discover these
+name strings from attached devices:
 
     (map find-name (find-controllers))
     
 Sometimes the names returned by the devices are vague, for example "USB Game Controllers" is the name
-of a single joystick. They may be more useful, such as "Controller (XBOX 360 For Windows)".
+of one joystick I have tested. They may be more useful, such as "Controller (XBOX 360 For Windows)".
 
 The utility function (find-controller x) does a regular expression match using its string
 parameter, so you can specify just enough to uniquely identify the specific controller
